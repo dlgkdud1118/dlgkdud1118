@@ -1,0 +1,60 @@
+
+public class Ex04ControlStatement04 {
+
+	public static void main(String[] args) {
+
+		java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+
+		// 3. 계산기 만들기
+		// ㄱ. 변수 3개 만들기 : 숫자, 연산자, 숫자를 저장하는 변수
+		// ㄴ. 사용자입력 (숫자), 사용자입력 (연산자) 사용자입력 (숫자)
+		// ㄷ. 연산자에 따라 해당 연산 수행 -> 결과를 변수에 저장
+		// ㄹ. 연산 결과 출력
+
+		// ㄱ, ㄴ 작업 수행
+		System.out.print("숫자 입력 : ");
+		int number = scanner.nextInt();
+
+		System.out.print("연산자 입력(+, -, *, /, %) : ");
+		// sign = scanner.nextLine(); // nextLine : Console에서 입력 받은 데이터를 문자열로 변환(enter를
+		// 입력으로 인식)
+		String sign = scanner.next(); // next : Console에서 입력 받은 데이터를 문자열로 변환 (enter를 입력으로 인식하지 않는다.)
+
+		System.out.print("숫자 입력 : ");
+		int number02 = scanner.nextInt();
+
+		// ㄷ. 작업 수행
+		double result = 0;
+		boolean Valid = true;
+		
+		switch(sign) { // sign의 값을 일고 일치하는 case를 찾는 형식, sign의 값은 정수 계열 및 문자열만 가능(실수 처리 불가능)
+		case "+":
+			result = number + number02;
+			break; // break : 즉시 switch문을 종료하는 명령
+		case "-":
+			result = number - number02;
+			break;
+		case "*":
+			result = number * number02;
+			break;
+		case "/":
+			result = number / number02;
+			break;
+		case "%":
+			result = number % number02;
+			break;
+		default: // 위 case에 해당하지 않는 모든 경우 (if문의 else 기능)
+			System.out.println("연산자를 다시 선택해주세요.");
+			Valid = false;
+		}
+		
+		// ㄹ. 작업 수행
+		if (Valid == true) {
+			System.out.printf("%d %s %d = %.2f\n", number, sign, number02, result); // %.2f : 실수, 소수점 2자리까지 출력
+		}
+
+		scanner.close(); // Scanner는 다 사용하면 닫아야 한다. (반납)
+	}
+
+}
