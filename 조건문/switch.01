@@ -1,0 +1,53 @@
+ package hitoride;
+
+import java.util.Random;
+
+public class Switch {
+
+	public static void main(String[] args) {
+
+		Random random = new Random();
+		
+		
+		int ca = random.nextInt(4);
+//		char ch = ' ';
+//		char ch = '\0';
+		char ch = '\u0000';
+		
+		
+		switch (ca) {
+		case 1:
+			ch = 'a';
+			break;
+		case 2:
+			ch = 'b';
+			break;
+		case 3:
+			ch = 'c';
+			break;
+		default:
+			System.out.println("1 ~ 3의 값이 입력되지 않았습니다.");
+			break;
+
+		}
+		
+		
+		switch (ch) {
+		case 'a':
+			System.out.println("ch는 a 입니다.");
+			break;
+		case 'b':
+			System.out.println("ch는 a 혹은 b입니다.");
+			break;
+		case 'c':
+			System.out.println("ch는 c입니다.");
+		default:
+			System.out.println("a도 b도 c도 아닙니다.");
+			break;
+		}
+		
+		
+
+	}
+
+}
