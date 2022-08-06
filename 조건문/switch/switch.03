@@ -9,6 +9,7 @@ public class SwitchTest03 {
 		Random random = new Random();
 
 		int time = random.nextInt(4) + 8;
+		System.out.println("[현재 시각: " + time + " 시 ");
 
 		switch (time) {
 		case 8:
