@@ -1,0 +1,6 @@
+// char 초기하는 방법
+
+
+//		char ch = ' ';
+//		char ch = '\0';
+		char ch = '\u0000';
