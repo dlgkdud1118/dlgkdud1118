@@ -1,0 +1,8 @@
+package dlgkdud;
+
+public class FieldInitValueExample {
+	public static void main(String[] args) {
+		FieldInitValue fiv = new FieldInitValue();
+
+	}
+}
