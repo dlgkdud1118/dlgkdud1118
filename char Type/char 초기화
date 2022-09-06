@@ -1,3 +1,0 @@
-//		char ch = ' ';
-//		char ch = '\0';
-		char ch = '\u0000';
