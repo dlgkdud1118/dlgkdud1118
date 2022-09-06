@@ -1,5 +1,0 @@
-package dlgkdud;
-
-public enum Week {
-	Monday, Tuesday, Wedneday, Thursday, Friday, Saturday, Sunday
-}
