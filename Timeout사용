@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>문서 객체 연습</title>
+    <style type="text/css">
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td colspan="2">
+                <button id="btn-start-game">게임시작</button>
+                <button id="btn-stop-game">게임중지</button>
+            </td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+        <tr>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+            <td><img></td>
+        </tr>
+    </table>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function(event) {
+
+            var imgFiles = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "10.jpg"] ;
+            var idxList = null;
+            var images = document.querySelectorAll("img");
+            var isRunning = false; // 작업이 진행중인지 여부를 저장하는 변수
+            var firstImg = null, secondImg = null; // 전면이 표시된 이미지를 저장하는 변수
+            var machingCnt = 0;
+
+            function resetIdx() {
+                idxList = [];
+                while (idxList.length < 20) { // 배열에 요소가 20개 채워질때까지 반복
+                    idx = Math.floor(Math.random() * 20); // 0 ~ 19(포함), 새로 뽑은 숫자
+                    var duplicate = false;  // 중복 여부를 저장하는 변수
+                    for (var j = 0; j < idxList.length; j++) {
+                        if (idxList[j] == idx) {    // idx가 기존에 뽑힌 숫자와 같다면
+                            duplicate = true;       // 중복 표시
+                            break;
+                        }
+                    }
+                    if (!duplicate) // 중복이 아닌 경우에만
+                        idxList.push(idx);  // 배열에 새로 뽑힌 숫자 추가
+                }
+            }
+            function setImages() {
+                for (var i = 0; i < imgFiles.length; i++) {
+                    idx = idxList[i]; // 위에서 뽑아둔 Random한 이미지 위치
+                    idx2 = idxList[10 + i]; // 위에서 뽑아둔 Random한 이미지 위치
+                    images[idx].src = `images/${imgFiles[i]}`;
+                    images[idx].alt = imgFiles[i];
+                    images[idx2].src = `images/${imgFiles[i]}`; 
+                    images[idx2].alt = imgFiles[i];
+
+                }
+            }
+            function initImages() {
+                resetIdx();
+                setImages();
+            }
+            
+            // 각 이미지에 이벤트 처리기 등록
+            for (var i = 0; i < images.length; i++) {
+                images[i].addEventListener("click", function(event) {
+                    if (event.target.src.includes(event.target.alt)) { // 이미지가 열려 있는지 확인
+                        return;
+                    }
+                    if (!isRunning) {
+                        // alert(event.target.alt);
+                        if (firstImg == null) { // 아무 이미지도 열리지 않은 경우
+                            firstImg = event.target ;
+                        } else if (secondImg == null) { // 첫 번째 이미지만 열린 경우
+                            secondImg = event.target;
+                            if (firstImg.alt === secondImg.alt) { // 일치하는 경우
+                                machingCnt++;                                
+                                firstImg = secondImg = null;
+                                if (machingCnt == images.length / 2) { // 다 찾은 경우
+                                    alert('성공했습니다. 축하합니다.');
+                                    machingCnt = 0;
+                                }
+                            } else {
+                                isRunning = true;
+                                setTimeout(function() {
+                                    firstImg.src = secondImg.src = 'images/no_image.jpg';
+                                    firstImg = secondImg = null;
+                                    isRunning = false;
+                                }, 1000);
+                            }
+                        } else { // 둘 다 열린 경우
+                            return;
+                        }
+                        event.target.src = `images/${event.target.alt}`;
+                    }
+                });
+            }
+
+            var btnStartGame = document.querySelector('#btn-start-game');
+            btnStartGame.addEventListener("click", function(event) {
+                initImages();
+                isRunning = true;
+                setTimeout(function() {
+                    for (var i = 0; i < images.length; i++) {
+                        images[i].src = 'images/no_image.jpg';
+                    }
+                    isRunning = false;
+                }, 3000);
+            });
+
+            var btnStopGame = document.querySelector('#btn-stop-game');
+            btnStopGame.addEventListener("click", function(event) {
+                for (var i = 0; i < images.length; i++) {
+                    images[i].alt = images[i].src = '';
+                }
+                firstImg = secondImg = null;  
+                idxList = null;
+                machingCnt = 0
+                isRunning = false;
+            });
+
+
+            var table = document.querySelector("table");
+            table.style.margin = "0 auto";
+            
+
+
+
+
+
+        });
+    </script>
+</body>
+</html>
