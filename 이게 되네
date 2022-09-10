@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나와 잘 맞는 동물은 무엇일까?</title>
+    <style>
+        table{
+            margin:0 auto;
+            border: 1px;
+        }
+        .a img{
+            width: 150px;
+            height: 150px;
+        }
+        .img_box img{
+            width:500px;
+            height:500px;
+        }
+        button{
+            width:100px;
+            height:50px;
+            font-size: 2em;
+            color: hotpink;
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr id="image-list-row">
+            <td class="a"><img></td>
+            <td class="a"><img></td>
+            <td class="a"><img></td>
+        </tr>
+        
+    </table>
+    <br>
+    <table border="1">
+        <tr id="dlgkdud">
+            <td class="img_box"><img></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td colspan="2">
+                <button id="btn-start-game">Start</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function(event){
+
+            
+        var randomNumber = null;
+        var randomNumber = null;
+        var images = null;
+        var images2 = null;
+        
+
+
+
+         
+         var imgFiles = ['1', '2', '3', '4', '5', '6', '7', '8', '9','10','11','12','13','14','15'];
+         //$('.img_box img').attr('src', '/images/' + imgFiles[randomNumber] + '.jpg');
+
+         function initImages(){ 
+            var images = document.querySelectorAll('#image-list-row img');
+            for (var i = 0; i < images.length; i++) {
+                var randomNumber = Math.floor(Math.random()*9)+1;
+                images[i].src = `images/${imgFiles[randomNumber]}.jpg`;
+         };
+        };
+
+        function zzz(){ 
+            var images2 = document.querySelectorAll('#dlgkdud img');
+            for (var j = 0; j < images2.length; j++) {
+                var randomNumber2 = Math.floor(Math.random()*15)+1;
+                images2[j].src = `images/${imgFiles[randomNumber2]}.jpg`;
+         };
+        };
+
+            let timerId=null;
+            var btnStartGame = document.querySelector('#btn-start-game');
+            btnStartGame.addEventListener("click", function(event) {
+                timerId = setInterval(function() {
+                    initImages();
+                }, 100);
+                    setTimeout(function(){
+                    clearInterval(timerId);
+                    zzz();
+                },3000);
+            });
+
+
+
+        });
+    </script>
+</body>
+</html>
