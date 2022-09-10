@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>랜덤만 됨</title>
+    <style>
+        table{
+            margin:"0 auto";
+        }
+        img{
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr id="image-list-row">
+            <td class="img_box1"><img></td>
+            <td class="img_box2"><img></td>
+            <td class="img_box3"><img></td>
+            <td class="img_box4"><img></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button id="btn-start-game">게임시작</button>
+                <button id="btn-stop-game">게임중지</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function(event){
+
+            
+        var randomNumber = null;
+        var isRunning = null;
+
+
+         
+         var imgFiles = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+         //$('.img_box img').attr('src', '/images/' + imgFiles[randomNumber] + '.jpg');
+
+         function initImages(){ 
+            var images = document.querySelectorAll('#image-list-row img');
+            for (var i = 0; i < images.length; i++) {
+            var randomNumber = Math.floor(Math.random()*8)+1;
+                images[i].src = `images/${imgFiles[randomNumber]}.jpg`;
+         };
+        };
+
+         let timerId=null;
+            var btnStartGame = document.querySelector('#btn-start-game');
+            btnStartGame.addEventListener("click", function(event) {
+                timerId = setInterval(function() {
+                    initImages();
+                }, 100);
+                    setTimeout(function(){
+                    clearInterval(timerId);
+                },3000);
+            });
+
+            
+
+
+
+            var btnStopGame = document.querySelector('#btn-stop-game');
+            btnStopGame.addEventListener("click", function(event) {
+                clearInterval(timerId); 
+            });
+
+
+            var table = document.querySelector("table");
+            table.style.margin = "0 auto";
+
+        });
+    </script>
+</body>
+</html>
