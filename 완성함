@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나와 잘 맞는 동물은 무엇일까?</title>
+    <style>
+        h1{
+            text-align: center;
+            font-style: normal;
+        }
+        table{
+            margin:0 auto;
+            border: 1px;
+        }
+        .a img{
+            width: 150px;
+            height: 130px;
+        }
+        .img_box img{
+            width:500px;
+            height:400px;
+        }
+        button{
+            width:100px;
+            height:50px;
+            font-size: 2em;
+            color: hotpink;
+            margin:0 auto;
+        }
+        p{
+            text-align:center;
+            font-style: normal;
+
+        }
+        input{
+            width:500px;
+            height:100px;
+            font-size: 1em;
+            text-align:center;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>나와 잘 맞는 동물은 무엇일까?</h1>
+    <table>
+        <tr id="image-list-row">
+            <td class="a"><img></td>
+            <td class="a"><img></td>
+            <td class="a"><img></td>
+        </tr>
+        
+    </table>
+    <br>
+    <table border="1">
+        <tr id="dlgkdud">
+            <td class="img_box"><img></td>
+        </tr>
+        <td><input type="text" id="name"></td>
+
+        
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td colspan="2">
+                <button id="btn-start-game">Start</button>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <script src="js/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function(event){
+
+            
+        var randomNumber = null;
+        var randomNumber = null;
+        var images = null;
+        var images2 = null;
+        var name = null;
+        
+
+
+
+         
+        var imgFiles = ['1', '2', '3', '4', '5', '6', '7', '8', '9','10','11','12','13','14','15'];
+        var textFiles = ['호주폐어는 수영을 잘 못합니다.', '귀여운 토끼입니다.', '북극여우가 멍때리고 있습니다.', '여우가 먹잇감을 발견한 표정으로 당신을 바라봅니다.', '개구리의 간택을 받았습니다.',
+         '도마뱀이 당신을 보고 입맛을 다십니다.', '부엉이가 피곤해하고 있습니다.', '지해의 고양이가 zoom화면에 비치고 있습니다.',
+          '수림언니의 강아지입니다.','수림언니의 강아지입니다.','황금볏과일박쥐가 당신의 집 앞에서 기다립니다.',
+          '핫핑크달팽이입니다. ','포투쏙독새는 배가고픕니다.','검은비개구리가 애처로운 눈빛으로 당신을 바라봅니다.','어깨걸이 극락조가 춤을 추고 있습니다.'];
+
+         function initImages(){ 
+            var images = document.querySelectorAll('#image-list-row img');
+            for (var i = 0; i < images.length; i++) {
+                var randomNumber = Math.floor(Math.random()*9)+1;
+                images[i].src = `images/${imgFiles[randomNumber]}.jpg`;
+         };
+        };
+
+        function zzz(){ 
+            var images2 = document.querySelectorAll('#dlgkdud img');
+            for (var j = 0; j < images2.length; j++) {
+                var randomNumber2 = Math.floor(Math.random()*15)+1;
+                images2[j].src = `images/${imgFiles[randomNumber2]}.jpg`;
+                var name = document.querySelector('#name');
+                name.value= `${textFiles[randomNumber2]}`;
+                // document.write(`<p>[${textFiles[j]}]</p>`)
+
+
+            };
+        };
+
+            let timerId=null;
+            var btnStartGame = document.querySelector('#btn-start-game');
+            btnStartGame.addEventListener("click", function(event) {
+                timerId = setInterval(function() {
+                    initImages();
+                }, 100);
+                    setTimeout(function(){
+                    clearInterval(timerId);
+                    zzz();
+                },3000);
+            });
+
+
+
+        });
+    </script>
+</body>
+</html>
